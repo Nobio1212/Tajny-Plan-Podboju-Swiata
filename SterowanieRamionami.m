@@ -70,8 +70,10 @@ show(pr2,jntPos)
 
 torsoJoint = pr2.getBody('torso_lift_link').Joint; % Przypisanie torsu robota do pojedynczej zmiennej
 idx = strcmp({jntPos.JointName}, torsoJoint.Name); % Porownanie nazw, proba znalezienia indeksu odpowiadajacego za tors robota
-torsoJoint.HomePosition = jntPos(idx).JointPosition; % Okreslenie pozycji bazowej torsu na podstawie wczesniej pobranych pozycji robota
-torsoJoint.PositionLimits = jntPos(idx).JointPosition + [-1e-3,1e-3]; % Ustalenie limitu ruchu torsu do pozycji bazowej z marginesem bledu +- 0,001
+torsoJoint.HomePosition = jntPos(idx).JointPosition; % Okreslenie pozycji bazowej torsu na podstawie wczesniej pobranych pozycji
+                                                     % robota
+torsoJoint.PositionLimits = jntPos(idx).JointPosition + [-1e-3,1e-3]; % Ustalenie limitu ruchu torsu do pozycji bazowej z
+                                                                      % marginesem bledu +- 0,001
 
 %% Tworzenie odwrotnej kinematyki
 
@@ -79,7 +81,7 @@ ik = robotics.InverseKinematics('RigidBodyTree', pr2);
 
 ik.SolverParameters.AllowRandomRestart = false; % Zabezpieczenie przed resetowaniem odwrotnej kinematyki
 
-%% Okreúlenie wag dla tolerancji kazdego komponentu wzgledem pozycji koncowej
+%% Okre≈õlenie wag dla tolerancji kazdego komponentu wzgledem pozycji koncowej
 
 weights = [0.25 0.25 0.25 1 1 1];
 initialGuess = jntPos; % biezaca pozycja przypisana jako przyblizona
@@ -100,7 +102,7 @@ TCanFinal = trvec2tform([0.504421, -0.044294, 1.070150]);
 
 TGraspToCan = trvec2tform([0,0,0.08])*eul2tform([pi/8,0,-pi]);
 
-%% Okreúlanie pozycji trajektorii manipulatora bazujacych na chwytaku
+%% Okre≈õlanie pozycji trajektorii manipulatora bazujacych na chwytaku
 
 TGrasp = TCanInitial*TGraspToCan; % Oczekiwana pozycja chwytaka podczas lapania puszki
 T1 = TGrasp*trvec2tform([0,0,-0.1]);
@@ -128,7 +130,7 @@ for i = 1: length(motionTask)
     end  
     
     Tf = motionTask{i};
-    % Pobranie aktualnych pozycji przegubÛw
+    % Pobranie aktualnych pozycji przegub√≥w
     jntState = receive(jointSub);
     jntPos = exampleHelperJointMsgToStruct(pr2, jntState);
     
