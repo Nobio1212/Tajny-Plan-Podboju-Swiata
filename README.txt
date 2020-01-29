@@ -1,6 +1,6 @@
 Sprawozdanie pierwsze zawiera się w plikach:
 	-KCN1.m
-	-Sprawozdanie z Żółwia
+	-Sprawozdanie z Żółwia.pdf
 
 
 Sprawozdanie drugie zawiera się w plikach:
